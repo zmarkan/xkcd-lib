@@ -15,7 +15,6 @@ object ComicViewer {
     interface Callback {
         fun success(result: VotingResult)
         fun failure(error: Throwable)
-
     }
 
     enum class VotingResult{

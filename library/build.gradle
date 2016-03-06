@@ -25,14 +25,21 @@ android {
 
 ext.retrofit_version = "2.0.0-beta4"
 ext.rxjava_version = "1.1.1"
+ext.support_lib_version = "23.2.0"
+ext.glide_version = "3.7.0"
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile "com.android.support:appcompat-v7:$support_lib_version"
+    compile "com.android.support:support-v4:$support_lib_version"
+
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile "com.github.bumptech.glide:glide:$glide_version"
 
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     provided "io.reactivex:rxjava:$rxjava_version"
+
 }
