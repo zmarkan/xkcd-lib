@@ -3,8 +3,8 @@ package com.zmarkan.sample;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.zmarkan.xkcdlib.ComicService;
-import com.zmarkan.xkcdlib.Injector;
+import com.zmarkan.xkcdlib.data.ComicService;
+import com.zmarkan.xkcdlib.data.Injector;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -27,6 +27,11 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 public class LibraryTest {
+
+    /*
+    * Integration test between test application and library.
+    * Mocks web server and checks how they link together.
+    * */
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);

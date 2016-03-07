@@ -1,11 +1,11 @@
-package com.zmarkan.xkcdlib
+package com.zmarkan.xkcdlib.data
 
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object Injector {
 
-    fun buildComicService(): ComicService{
+    fun buildComicService(): ComicService {
                 val retrofit = Retrofit.Builder()
                         .baseUrl("http://xkcd.com")
                         .addConverterFactory(MoshiConverterFactory.create())

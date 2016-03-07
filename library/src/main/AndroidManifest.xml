@@ -3,11 +3,10 @@
     package="com.zmarkan.xkcdlib">
 
     <application
-        android:name=".LibraryApplication"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity android:name="com.zmarkan.xkcdlib.ComicActivity"></activity>
+        <activity android:name=".view.ComicActivity"></activity>
     </application>
 
 </manifest>

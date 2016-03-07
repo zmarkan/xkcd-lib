@@ -1,5 +1,8 @@
-package com.zmarkan.xkcdlib
+package com.zmarkan.xkcdlib.view
 
+import com.zmarkan.xkcdlib.ComicViewer
+import com.zmarkan.xkcdlib.data.Comic
+import com.zmarkan.xkcdlib.data.Injector
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,7 +14,7 @@ class ComicPresenterImpl : ComicPresenter {
 
     constructor(view: ComicView?){
         this.view = view
-        injector.comicService.getTodaysComic().enqueue(object: Callback<Comic>{
+        injector.comicService.getTodaysComic().enqueue(object: Callback<Comic> {
             override fun onResponse(call: Call<Comic>, response: Response<Comic>) {
                 view?.showComic(response.body())
             }

@@ -1,4 +1,4 @@
-package com.zmarkan.xkcdlib
+package com.zmarkan.xkcdlib.data
 
 import retrofit2.Call
 import retrofit2.http.GET

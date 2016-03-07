@@ -1,4 +1,4 @@
-package com.zmarkan.xkcdlib
+package com.zmarkan.xkcdlib.view
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.zmarkan.xkcdlib.data.Comic
+import com.zmarkan.xkcdlib.ComicViewer
+import com.zmarkan.xkcdlib.R
 
 class ComicActivity : AppCompatActivity(), ComicView {
 

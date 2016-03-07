@@ -1,4 +1,4 @@
-package com.zmarkan.xkcdlib
+package com.zmarkan.xkcdlib.data
 
 data class Comic(
         val num: Int,
