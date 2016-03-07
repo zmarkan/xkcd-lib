@@ -3,23 +3,27 @@ package com.zmarkan.sample;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-
-import junit.framework.Assert;
+import com.zmarkan.xkcdlib.ComicService;
+import com.zmarkan.xkcdlib.Injector;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import retrofit2.Retrofit;
+import retrofit2.converter.moshi.MoshiConverterFactory;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 public class LibraryTest {
@@ -27,28 +31,44 @@ public class LibraryTest {
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
 
-    @Rule
-    WireMockRule wiremockRule = new WireMockRule();
-
     @Before
     public void setUp(){
+        setupMockWebServer();
 
-        wiremockRule.stubFor(get(urlMatching("/info.0.json/"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withBody("{\"month\": \"3\", \"num\": 1651, \"link\": \"\", \"year\": \"2016\", \"news\": \"\", \"safe_title\": \"Robotic Garage\", \"transcript\": \"\", \"alt\": \"ALT TEXT\", \"img\": \"http:\\/\\/imgs.xkcd.com\\/comics\\/robotic_garage.png\", \"title\": \"Robotic Garage\", \"day\": \"4\"}")));
-    }
-
-    @Test
-    public void sampleTest(){
-        Assert.assertTrue(true);
-    }
-
-    @Test
-    public void openLibrary(){
         onView(withId(R.id.button)).perform(click());
-        onView(withId(R.id.title_textview)).check(matches(isDisplayed()));
     }
 
+    private void setupMockWebServer() {
+        MockWebServer mockWebServer = new MockWebServer();
+        String serverBaseUrl = mockWebServer.url("/").toString();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(serverBaseUrl)
+                .addConverterFactory(MoshiConverterFactory.create())
+                .build();
+        Injector.INSTANCE.setComicService(retrofit.create(ComicService.class));
 
+        mockWebServer.enqueue(
+                new MockResponse()
+        .setResponseCode(200)
+        .setBody("{\"month\": \"3\", \"num\": 1652, \"link\": \"\", \"year\": \"2016\", \"news\": \"\", \"safe_title\": \"Conditionals\", \"transcript\": \"\", \"alt\": \"HELLO WORLD\", \"img\": \"http:\\/\\/imgs.xkcd.com\\/comics\\/conditionals.png\", \"title\": \"Conditionals\", \"day\": \"7\"}"));
+    }
+
+    @Test
+    public void openLibrary() throws InterruptedException {
+        onView(withId(R.id.title_textview)).check(matches(isDisplayed()));
+        onView(withId(R.id.upvote_button)).perform(scrollTo()).check(matches(isDisplayed()));
+        onView(withId(R.id.downvote_button)).perform(scrollTo()).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void title(){
+        onView(withText("Conditionals")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void altTextOnImagePress() throws InterruptedException {
+        onView(withText("HELLO WORLD")).check(doesNotExist());
+        onView(withId(R.id.xkcd_imageview)).perform(click());
+        onView(withText("HELLO WORLD")).check(matches(isDisplayed()));
+    }
 }

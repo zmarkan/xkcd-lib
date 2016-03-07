@@ -22,6 +22,7 @@ android {
 }
 
 ext.support_lib_version = "23.1.1"
+ext.mockwebserver_version = "3.2.0"
 
 configurations.all {
     resolutionStrategy {
@@ -55,9 +56,5 @@ dependencies {
         exclude module: 'support-annotations'
         exclude module: 'support-v4'
     }
-
-    androidTestCompile 'com.github.tomakehurst:wiremock:1.51:standalone'
-
-
-
+    androidTestCompile "com.squareup.okhttp3:mockwebserver:$mockwebserver_version"
 }

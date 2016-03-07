@@ -25,7 +25,6 @@ class ComicActivity : AppCompatActivity(), ComicView {
     }
 
     override fun showComic(comic: Comic) {
-
         title?.text = comic.title
         Glide.with(this).load(comic.img).into(imageView)
 
