@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity implements ComicViewer.Callb
         });
     }
 
-
-
     @Override
     public void success(@NotNull ComicViewer.VotingResult result) {
         Snackbar.make(findViewById(R.id.container), result.toString(), Snackbar.LENGTH_LONG).show();

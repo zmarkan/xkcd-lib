@@ -24,8 +24,7 @@ android {
 }
 
 ext.retrofit_version = "2.0.0-beta4"
-ext.rxjava_version = "1.1.1"
-ext.support_lib_version = "23.2.0"
+ext.support_lib_version = "23.1.1"
 ext.glide_version = "3.7.0"
 
 dependencies {
@@ -41,6 +40,4 @@ dependencies {
 
     compile "com.squareup.retrofit2:retrofit:$retrofit_version"
     compile "com.squareup.retrofit2:converter-moshi:$retrofit_version"
-    provided "io.reactivex:rxjava:$rxjava_version"
-
 }

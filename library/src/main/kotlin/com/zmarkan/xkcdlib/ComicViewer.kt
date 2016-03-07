@@ -1,7 +1,6 @@
 package com.zmarkan.xkcdlib
 
 import android.content.Context
-import android.content.Intent
 
 object ComicViewer {
 
@@ -9,7 +8,7 @@ object ComicViewer {
 
     fun viewComicOfTheDAy(activityContext: Context, callback: Callback) {
         this.callback = callback
-        activityContext.startActivity(Intent(activityContext, ComicActivity::class.java))
+        activityContext.startActivity(ComicActivity.intents.buildIntent(activityContext))
     }
 
     interface Callback {

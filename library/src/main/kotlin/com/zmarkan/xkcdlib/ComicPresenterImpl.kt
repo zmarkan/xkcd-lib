@@ -12,12 +12,15 @@ class ComicPresenterImpl : ComicPresenter {
     constructor(view: ComicView?){
         this.view = view
 
+
+        //TODO: inject this or retrofit entirely
         val retrofit = Retrofit.Builder()
                 .baseUrl("http://xkcd.com")
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
 
         val comicService: ComicService = retrofit.create(ComicService::class.java)
+        
         comicService.getTodaysComic().enqueue(object: Callback<Comic>{
             override fun onResponse(call: Call<Comic>, response: Response<Comic>) {
                 view?.showComic(response.body())
