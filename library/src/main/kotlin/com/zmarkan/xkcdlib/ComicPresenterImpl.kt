@@ -24,20 +24,14 @@ class ComicPresenterImpl : ComicPresenter {
             }
 
             override fun onFailure(call: Call<Comic>, error: Throwable) {
-                //TODO how to destroy view
                 ComicViewer.callback?.failure(error)
-//                view.destroy
-
             }
-
-
         })
     }
 
-
-
     override fun comicVoted(vote: ComicViewer.VotingResult) {
-        throw UnsupportedOperationException()
+        ComicViewer.callback?.success(vote)
+        view?.destroyView()
     }
 
     override fun viewDestroyed(){

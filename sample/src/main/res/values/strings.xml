@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">xkcd-lib</string>
+    <string name="press_me">Press me!</string>
 </resources>
