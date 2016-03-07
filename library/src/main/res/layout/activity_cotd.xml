@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    >
+    android:layout_width="match_parent">
 
     <RelativeLayout
         android:id="@+id/container"
@@ -16,7 +15,6 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.zmarkan.xkcdlib.ComicActivity">
 
-        <!-- TODO: add this to scrollview -->
         <TextView
             android:id="@+id/title_textview"
             android:layout_width="match_parent"
@@ -49,11 +47,5 @@
             android:src="@drawable/downvote"
             style="@style/vote_button" />
 
-
-
-
-
     </RelativeLayout>
-
-
 </ScrollView>

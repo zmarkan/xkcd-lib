@@ -71,4 +71,20 @@ public class LibraryTest {
         onView(withId(R.id.xkcd_imageview)).perform(click());
         onView(withText("HELLO WORLD")).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void performUpvote(){
+        onView(withId(R.id.upvote_button)).perform(scrollTo()).perform(click());
+
+        onView(withId(R.id.main_container)).check(matches(isDisplayed()));
+        onView(withText("UPVOTE")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void performDownvote(){
+        onView(withId(R.id.downvote_button)).perform(scrollTo()).perform(click());
+
+        onView(withId(R.id.main_container)).check(matches(isDisplayed()));
+        onView(withText("DOWNVOTE")).check(matches(isDisplayed()));
+    }
 }

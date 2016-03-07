@@ -24,6 +24,13 @@ class ComicActivity : AppCompatActivity(), ComicView {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_cotd)
+        presenter = ComicPresenterImpl(this)
+        setupViews()
+    }
+
     override fun showComic(comic: Comic) {
         title?.text = comic.title
         Glide.with(this).load(comic.img).into(imageView)
@@ -38,19 +45,6 @@ class ComicActivity : AppCompatActivity(), ComicView {
 
     var presenter: ComicPresenter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cotd)
-        presenter = ComicPresenterImpl(this)
-
-        //Kotlin extensions currently broken so we must do this the old fashoned way :(
-        title = findViewById(R.id.title_textview) as TextView
-        imageView = findViewById(R.id.xkcd_imageview) as ImageView
-        upvoteButton = findViewById(R.id.upvote_button) as ImageView
-        downvoteButton = findViewById(R.id.downvote_button) as ImageView
-        container = findViewById(R.id.container) as ViewGroup
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         presenter?.viewDestroyed()
@@ -58,5 +52,14 @@ class ComicActivity : AppCompatActivity(), ComicView {
 
     override fun destroyView() {
         finish()
+    }
+
+    private fun setupViews() {
+        //Kotlin extensions currently broken so we must do this the old fashoned way :(
+        title = findViewById(R.id.title_textview) as TextView
+        imageView = findViewById(R.id.xkcd_imageview) as ImageView
+        upvoteButton = findViewById(R.id.upvote_button) as ImageView
+        downvoteButton = findViewById(R.id.downvote_button) as ImageView
+        container = findViewById(R.id.container) as ViewGroup
     }
 }
