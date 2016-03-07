@@ -1,4 +1,4 @@
-XKCD-LIB
+XKCD-LIB for Android
 ==
 
 Made with ❤️ for Onfido.
